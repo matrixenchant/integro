@@ -17,11 +17,11 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
-// App
-app.use('/', require('./client.router'));
-
 // Api
 app.use('/api', api);
+
+// App
+app.use('/*', require('./client.router'));
 
 server.listen(5000, async () => {
   try {
