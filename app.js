@@ -18,12 +18,12 @@ app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
 // App
-// app.use(subdomain('integro', require('./client.router')));
+app.use(subdomain('int1', require('./client.router')));
 
 // Api
 app.use('/api', api);
 
-server.listen(8000, async () => {
+server.listen(1010, async () => {
   try {
     console.log('server starting...');
     await db.connect();
