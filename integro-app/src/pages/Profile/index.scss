@@ -167,10 +167,13 @@
     &-wrap {
       margin-top: 10px;
       padding: 0 20px;
-      width: fit-content;
-      display: flex;
-      flex-wrap: nowrap;
       overflow-x: auto;
+
+      & > div {
+        width: fit-content;
+        display: flex;
+        flex-wrap: nowrap;
+      }
     }
 
     &-empty {
@@ -180,6 +183,11 @@
     }
 
     &__item {
+      margin-left: 15px;
+      &:first-child {
+        margin-left: 0;
+      }
+
       width: 180px;
       border-radius: 15px;
       background-color: var(--dark-blue);

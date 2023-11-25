@@ -70,9 +70,11 @@ const Profile = () => {
             <h5>{userRank.label}</h5>
           </div>
         </div>
-        {nextRank && <h4>
-          ещё {formatNumber(nextRank.value - user.balance)} до ранга "{nextRank.label}"
-        </h4>}
+        {nextRank && (
+          <h4>
+            ещё {formatNumber(nextRank.value - user.balance)} до ранга "{nextRank.label}"
+          </h4>
+        )}
       </div>
 
       <div className="profile-rank-progress">
@@ -97,12 +99,14 @@ const Profile = () => {
         </div>
         {!!user?.awards?.length && (
           <div className="profile-awards-wrap">
-            {user.awards.map((award) => (
-              <div className="profile-awards__item" key={award._id}>
-                <div style={{ backgroundImage: `url(${award.image})` }}></div>
-                <div>{award.title}</div>
-              </div>
-            ))}
+            <div>
+              {user.awards.map((award) => (
+                <div className="profile-awards__item" key={award._id}>
+                  <div style={{ backgroundImage: `url(${award.image})` }}></div>
+                  <div>{award.title}</div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
