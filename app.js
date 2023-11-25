@@ -23,7 +23,7 @@ app.use('/', require('./client.router'));
 // Api
 app.use('/api', api);
 
-server.listen(8889, async () => {
+server.listen(5000, async () => {
   try {
     console.log('server starting...');
     await db.connect();
