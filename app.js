@@ -18,7 +18,7 @@ app.use(cors());
 app.use('/uploads', express.static('uploads'));
 
 // App
-app.use(subdomain('int1', require('./client.router')));
+app.use('/', require('./client.router'));
 
 // Api
 app.use('/api', api);
