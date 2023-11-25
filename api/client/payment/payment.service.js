@@ -13,8 +13,8 @@ export const closePaymentById = async (req) => {
   const payment = await Payment.findOne({ user: req.user._id, _id: paymentId });
   if (!payment) throw notFound('PAYMENT.ERROR.NOT_EXIST');
 
-  const project = await Project.findOne({ _id: payment.info.projectId });
-  project.current += payment.info.award.price;
+  const project = await Project.findOne({ _id: payment.projectId });
+  project.current += payment.price;
   await project.save();
 
   payment.status = 'confirm';

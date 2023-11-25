@@ -117,14 +117,14 @@ const AuthModal = ({ open, closeModal, data: { view_ } }) => {
             icon="fi-rr-arrow-right"
             iconAlign="end"
           />
-          <Button
+          {/* <Button
             onClick={() => navigate('/')}
             loading={loading}
             style={{ marginTop: 10 }}
             fullWidth
             label="Продолжить с Google"
             type="neutral"
-          />
+          /> */}
           <Button
             onClick={() => setView('reg')}
             disabled={loading}
