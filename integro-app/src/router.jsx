@@ -14,7 +14,7 @@ export default function Router() {
     if (isFirstLaunch) navigate('/welcome');
   }, []);
 
-  if (!projects.length || !user) return <div className="app-wrapper"></div>;
+  if (!projects.length) return <div className="app-wrapper"></div>;
 
   return (
     <div className="app-wrapper">
