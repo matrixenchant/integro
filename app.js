@@ -28,7 +28,7 @@ server.listen(5000, async () => {
     console.log('server starting...');
     await db.connect();
 
-    console.log('server started on port 8000');
+    console.log('server started on port 5000');
   } catch (e) {
     console.log('server error: ', e);
   }

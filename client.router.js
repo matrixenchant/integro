@@ -4,9 +4,9 @@ const path = require('path');
 
 const router = Router();
 
-router.use('/', express.static(path.join(__dirname, './intergro-app/dist')));
+router.use('/', express.static(path.join(__dirname, './integro-app/dist')));
 router.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, './intergro-app/dist', 'index.html'));
+  res.sendFile(path.join(__dirname, './integro-app/dist', 'index.html'));
 });
 
 module.exports = router;
