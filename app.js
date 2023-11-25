@@ -21,7 +21,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api', api);
 
 // App
-app.use('/*', require('./client.router'));
+app.use('/', require('./client.router'));
 
 server.listen(5000, async () => {
   try {
