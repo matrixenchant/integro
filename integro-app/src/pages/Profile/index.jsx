@@ -50,7 +50,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [loading, payments, mutate] = useGetApi('payments', []);
   const [_, api] = useApi();
-  const { user } = useApp();
+  const { user, logout } = useApp();
 
   const userRank = ranks.find((x) => x.slug === user.rank) || ranks[0];
 
@@ -80,6 +80,13 @@ const Profile = () => {
         type="text"
         className="profile-back"
       />
+      <Button
+        onClick={() => logout()}
+        icon="fi-rr-exit"
+        type="text"
+        className="profile-exit"
+      />
+
 
       <div className="profile-user">
         <User withAvatar withDonations withEdit />

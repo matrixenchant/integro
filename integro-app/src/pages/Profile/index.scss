@@ -7,6 +7,16 @@
     z-index: -1;
   }
 
+  &-exit {
+    position: absolute;
+    right: 0px;
+    top: 15px;
+
+    i {
+      color: var(--error) !important;
+    }
+  }
+
   &-back {
     margin-top: 15px;
     margin-left: 10px;

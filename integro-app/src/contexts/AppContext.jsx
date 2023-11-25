@@ -26,6 +26,7 @@ export const AppProvider = ({ children }) => {
     error: (e) => {
       if (e?.code === 401) {
         localStorage.removeItem('token');
+        navigate('/')
       }
     }
   });
@@ -39,6 +40,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const logout = () => {
+    navigate('/welcome');
     setToken(null);
     localStorage.removeItem('token');
   };
