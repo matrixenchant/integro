@@ -1,0 +1,46 @@
+.user {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+        margin-right: 10px;
+    }
+
+    &-name {
+        display: flex;
+        align-items: center;
+        
+        font-size: 18px;
+        line-height: 1.2;
+    }
+
+    &-rank {
+        margin-left: 5px;
+
+        padding: 2px 10px;
+        border-radius: 12px;
+
+        font-size: 12px;
+        background-color: var(--green);
+        font-family: monospace;
+    }
+
+    &-donations {
+        font-size: 14px;
+        opacity: 0.5;
+    }
+
+    &-edit {
+        margin-top: 5px;
+        font-size: 14px;
+        text-decoration: underline;
+        color: var(--green);
+        
+        transition: 0.4s ease;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}

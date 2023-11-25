@@ -1,0 +1,176 @@
+.ui-button {
+  --ui-btn-icon-gap: 10px;
+  transition: 0.4s ease;
+
+  &-wrap {
+    position: relative;
+    overflow: hidden;
+
+    padding: 10px 30px;
+    border-radius: 50px;
+    z-index: 2;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.4s ease;
+    transform-origin: top;
+  }
+
+  &-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-color: black;
+    transform-origin: left top;
+    opacity: 0;
+    filter: blur(10px);
+    z-index: 2;
+  }
+
+  &-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .fi {
+      line-height: 0;
+      transition: 0.6s ease;
+      color: inherit;
+    }
+  }
+
+  &-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(0);
+    overflow: hidden;
+
+    transition: 0.4s ease;
+    transform-origin: bottom;
+
+    span {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      position: relative;
+      animation: rotate 1s linear infinite;
+    }
+
+    span::before,
+    span::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      inset: 0px;
+      border-radius: 50%;
+      border: 2px solid var(--white);
+      animation: prixClipFix 2s linear infinite alternate-reverse;
+    }
+    span::after {
+      transform: rotate3d(90, 90, 0, 180deg);
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes prixClipFix {
+      0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+      }
+      50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+      }
+      75%,
+      100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+      }
+    }
+  }
+
+  cursor: pointer;
+
+  span {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &--type-main .ui-button-wrap {
+    background-color: var(--green);
+    color: white;
+  }
+  &--type-primary .ui-button-wrap {
+    background-color: var(--primary);
+    color: white;
+
+    .ui-button-ripple {
+      background-color: white;
+    }
+
+    .ui-button-loading span::after,
+    .ui-button-loading span::before {
+      border-color: white;
+    }
+  }
+  &--type-text .ui-button-wrap {
+    background-color: transparent;
+    color: var(--white);
+
+    .ui-button-ripple {
+      background-color: var(--green);
+    }
+  }
+  &--type-neutral .ui-button-wrap {
+    background-color: var(--white);
+    color: var(--black);
+
+    .ui-button-ripple {
+      background-color: var(--green);
+    }
+  }
+  &--type-secondary .ui-button-wrap {
+    background-color: var(--dark-blue);
+    color: var(--green);
+  }
+  &--type-error .ui-button-wrap {
+    background-color: var(--error);
+    color: var(--white);
+  }
+
+  &--loading {
+    cursor: auto;
+    opacity: 0.8;
+
+    .ui-button-body {
+      transform: scaleY(0);
+    }
+    .ui-button-loading {
+      transform: translate(-50%, -50%) scaleY(1);
+    }
+  }
+
+  &:disabled {
+    cursor: auto;
+    opacity: 0.5;
+    filter: saturate(0);
+  }
+}

@@ -1,0 +1,45 @@
+.auth-modal {
+    padding-top: 0;
+    padding: 15px;
+    overflow: hidden;
+
+    &-title {
+        position: relative;
+        margin-bottom: 40px;
+
+        h1 {
+            overflow: hidden;
+            transform-origin: left;
+            transition: 0.4s ease;
+            
+            &:last-child {
+                transform-origin: right;
+                top: 0;
+                position: absolute;
+            }
+        }
+    }
+
+    .ui-input {
+        width: 100%;
+
+        & + .ui-input {
+            margin-top: 20px;
+        }
+    }
+
+    &-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+        width: fit-content;
+    }
+
+    &-view {
+        flex-shrink: 0;
+        width: 100%;
+
+        &:last-child {
+            margin-left: 20px;
+        }
+    }
+}

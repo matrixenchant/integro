@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap');
+
+@import url('https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+
+  --black: #191e29;
+  --dark-blue: #132d46;
+  --blue: #1b4064;
+  --green: #01c38d;
+  --white: #ffffff;
+
+  --error: #F36464;
+  --alert: #FBBC05;
+}
+
+*::-webkit-scrollbar{
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  background-color: var(--black);
+}
+
+.page {
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  margin: 0;
+  font-weight: 400;
+}
+
+button,
+input {
+  background: none;
+  border: none;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
+.app-wrapper {
+  transform-origin: center;
+
+  transition: 0.5s ease;
+  &.modal--active {
+    transform: scale(0.95);
+  }
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 999;
+  overflow: hidden;
+
+  &.active {
+    .modal-shadow {
+      opacity: 1;
+    }
+  }
+}
+
+.modal-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0 0;
+  border-radius: 30px 30px 0px 0px;
+  background: rgba(25, 30, 41, 0.95);
+  box-shadow: 0px -20px 40px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2.5px);
+  z-index: 2;
+
+  //  height: 500px;
+
+  &-handle {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    touch-action: none;
+
+    div {
+      margin: 0 auto;
+      width: 40px;
+      height: 4px;
+      background-color: var(--green);
+      border-radius: 10px;
+    }
+
+    &:hover {
+      div {
+        transform: scale(0.9);
+      }
+    }
+  }
+}

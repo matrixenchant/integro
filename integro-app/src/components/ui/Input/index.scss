@@ -1,0 +1,51 @@
+.ui-input {
+  position: relative;
+
+  &-body {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    input {
+      width: 100%;
+      padding: 10px 25px;
+      border-radius: 50px;
+      background-color: var(--dark-blue);
+      border-bottom: 2px solid var(--green);
+      transition: 0.4s ease;
+      color: var(--white);
+
+      &::placeholder {
+        color: rgba($color: white, $alpha: 0.5);
+      }
+      &:focus {
+      }
+    }
+  }
+
+  &-label {
+    position: absolute;
+    top: 0;
+    left: 22px;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    padding: 2px 5px;
+
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: none;
+  color: white;
+  caret-color: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: white;
+  box-shadow: 0 0 0px 1000px var(--dark-blue) inset;
+}

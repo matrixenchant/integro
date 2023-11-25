@@ -1,0 +1,12 @@
+.home-header {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-balance {
+    .ui-button-wrap {
+      padding: 8px 16px;
+    }
+  }
+}

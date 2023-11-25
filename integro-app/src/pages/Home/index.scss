@@ -1,0 +1,83 @@
+.home {
+  position: relative;
+  overflow: hidden;
+
+  .decor {
+    position: absolute;
+    z-index: -1;
+
+    &1 {
+      top: -50px;
+      right: -56px;
+    }
+    &2 {
+      top: 123px;
+      left: -100px;
+    }
+  }
+
+  &-shop {
+    margin: 30px 0;
+
+    &-top {
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    &-future {
+      width: 150px;
+      height: 150px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px;
+      box-sizing: border-box;
+
+      background-color: rgba($color: white, $alpha: 0.1);
+      border-radius: 20px;
+    }
+  }
+
+  &-list {
+    margin: 30px 0;
+
+    &-wrap {
+      padding: 0 15px;
+      overflow: hidden;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar{
+        width: 0px;  /* Remove scrollbar space */
+        background: transparent;  /* Optional: just make scrollbar invisible */
+      }
+
+      & > div {
+        width: fit-content;
+        display: flex;
+        flex-wrap: nowrap;
+
+        & > * {
+          flex-shrink: 0;
+        }
+        & > * + * {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+
+  &-new-projects {
+    h2 {
+      padding: 0 15px;
+      margin-bottom: 10px;
+    }
+  }
+}
