@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import toast from 'react-hot-toast';
 import { Button } from '../../components/ui';
 import { useApi } from '../../hooks/useApi';
 import './index.scss';
-import toast from 'react-hot-toast';
 
 const AddReviewModal = ({ data, closeModal, open }) => {
   const { project, $addReview } = data;
@@ -22,7 +22,7 @@ const AddReviewModal = ({ data, closeModal, open }) => {
         $addReview(newReview);
         toast.success('Ваше мнение добавлено');
         closeModal();
-      }
+      },
     });
   };
 

@@ -68,7 +68,8 @@ function lerp(start, end, progress) {
 }
 
 function formatNumber(num) {
+  if (!num) return undefined;
   return num.toLocaleString();
 }
 
-export { $class, interpolateColor, lerp, emailRegex, formatNumber };
+export { $class, emailRegex, formatNumber, interpolateColor, lerp };

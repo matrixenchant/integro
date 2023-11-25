@@ -8,8 +8,12 @@ export const AppContext = createContext({
   user: null,
   login: (token) => {},
   logout: () => {},
+  changeUser: (props) => {},
+  getRankBySlug: (slug) => {},
+  
 
   projects: [],
+  ranks: [],
   getProjectById: (id) => {},
 });
 
@@ -26,11 +30,52 @@ export const AppProvider = ({ children }) => {
     error: (e) => {
       if (e?.code === 401) {
         localStorage.removeItem('token');
-        navigate('/')
+        navigate('/');
       }
-    }
+    },
   });
   const [loadingProjects, projects] = useGetApi('projects', []);
+
+  const ranks = [
+    {
+      slug: 'newbie',
+      label: 'Новичок',
+      icon: 'fi-rr-medical-star',
+      value: 0,
+    },
+    {
+      slug: 'empathy',
+      label: 'Энтузиаст Эмпатии',
+      icon: 'fi-rr-hand-heart',
+      value: 10000,
+    },
+    {
+      slug: 'angel',
+      label: 'Бизнес Ангел',
+      icon: 'fi-rr-angel',
+      value: 20000,
+    },
+    {
+      slug: 'star',
+      label: 'Звезда Содействия',
+      icon: 'fi-rr-star-christmas',
+      value: 30000,
+    },
+    {
+      slug: 'inspiration',
+      label: 'Меценат Вдохновения',
+      icon: 'fi-rr-star-shooting',
+      value: 40000,
+    },
+  ];
+
+  const getRankBySlug = (slug) => {
+    return ranks.find(x => x.slug === slug)
+  }
+
+  const changeUser = (props) => {
+    mutateUser({ ...user, ...props });
+  };
 
   const login = (token) => {
     setToken(token);
@@ -58,12 +103,14 @@ export const AppProvider = ({ children }) => {
         logout,
         getProjectById,
         projects,
+        changeUser,
+        ranks,
+        getRankBySlug
       }}>
       {children}
     </AppContext.Provider>
   );
 };
-
 
 /*
 

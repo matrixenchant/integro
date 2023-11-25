@@ -10,6 +10,7 @@ const ProjectSchema = new Schema(
 
     video: String,
     poster: String,
+    content: Object,
     awards: {
       type: Array,
       default: []

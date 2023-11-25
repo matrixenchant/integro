@@ -19,6 +19,17 @@ export const getProjectReviewsById = async (req) => {
   return reviews;
 };
 
+export const updateProjectById = async (req) => {
+  const { _id } = req.params;
+  const { content } = req.body;
+
+  const project = await Project.findOne({ _id });
+  project.content = content;
+  await project.save();
+  
+  return project;
+};
+
 export const addProjectReviewById = async (req) => {
   const { _id } = req.params;
   const { text } = req.body;
@@ -36,6 +47,8 @@ export const addProjectReviewById = async (req) => {
   project.reviews.push(newReview);
 
   await project.save();
+
+  newReview.user = req.user;
 
   return newReview;
 };

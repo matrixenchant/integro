@@ -2,11 +2,14 @@ import React from 'react';
 import { useApp } from '../../hooks/useApp';
 import Avatar from '../Avatar';
 import './index.scss';
+import { Icon } from '../ui';
 
-const User = ({ user, withAvatar, withDonations, withEdit }) => {
-  const { user: thisUser } = useApp();
+const User = ({ user, withAvatar, withDonations, withEdit, donationsText }) => {
+  const { user: thisUser, getRankBySlug } = useApp();
 
   const targetUser = user || thisUser;
+
+  console.log('=============', getRankBySlug(targetUser?.rank), targetUser?.rank);
 
   if (!targetUser)
     return (
@@ -21,9 +24,9 @@ const User = ({ user, withAvatar, withDonations, withEdit }) => {
       <div>
         <div className="user-name">
           <span>{targetUser.name}</span>
-          <span className="user-rank">{targetUser?.rank}</span>
+          <span className="user-rank"><Icon slug={getRankBySlug(targetUser?.rank)?.icon} /></span>
         </div>
-        {withDonations && <div className="user-donations">{targetUser.donations || 0} пожертвований</div>}
+        {withDonations && <div className="user-donations">{donationsText ? donationsText : `${targetUser.donations || 0} пожертвований`}</div>}
         {withEdit && <div className="user-edit">редактировать</div>}
       </div>
     </div>

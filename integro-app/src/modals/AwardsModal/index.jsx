@@ -41,7 +41,7 @@ const AwardsModal = ({ data, closeModal }) => {
       <div className="awards-modal-wrap">
         {awards.map((award) => (
           <div className="awards-modal__item" key={award._id}>
-            <div className="awards-modal__item-image"></div>
+            <div className="awards-modal__item-image" style={{ backgroundImage: `url(${award.image})` }}></div>
             <div className="awards-modal__item-wrap">
               <div className="awards-modal__item-top">
                 <div>{award.title}</div>

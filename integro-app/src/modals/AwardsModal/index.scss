@@ -80,6 +80,9 @@
             height: 180px;
             background-color: rgba($color: white, $alpha: 0.2);
             border-radius: 20px;
+
+            background-position: center;
+            background-size: cover;
         }
 
         &-top {

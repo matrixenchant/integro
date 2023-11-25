@@ -15,7 +15,7 @@ const UserSchema = new Schema(
       type: String,
       default: null,
     },
-    role: {
+    rank: {
       type: String,
       default: 'newbie',
     },
@@ -27,10 +27,22 @@ const UserSchema = new Schema(
       type: String,
       default: null,
     },
+    overallBalance: {
+      type: Number,
+      default: 0,
+    },
     balance: {
       type: Number,
       default: 0,
     },
+    donations: {
+      type: Number,
+      default: 0,
+    },
+    awards: {
+      type: Array,
+      default: []
+    }
   },
   { timestamps: true }
 );

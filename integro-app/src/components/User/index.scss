@@ -17,12 +17,14 @@
     &-rank {
         margin-left: 5px;
 
-        padding: 2px 10px;
+        padding: 3px 8px;
         border-radius: 12px;
 
-        font-size: 12px;
+        text-align: center;
+
+        font-size: 10px;
+        line-height: 0;
         background-color: var(--green);
-        font-family: monospace;
     }
 
     &-donations {
