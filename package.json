@@ -4,7 +4,7 @@
   "description": "Crowdfunding app",
   "main": "app.js",
   "scripts": {
-    "start": "node babel-node app.js",
+    "start": "nodemon --config nodemon.json --exec babel-node app.js --legacy-watch",
     "dev": "nodemon --config nodemon.json --exec babel-node app.js --legacy-watch"
   },
   "author": "Only.",
