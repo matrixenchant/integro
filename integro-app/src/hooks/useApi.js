@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useApp } from './useApp';
 
-const SERVER = import.meta.env.VITE_SERVER;
+const SERVER = '';
 
 export const useApi = (params = {}) => {
   const { initLoading } = {
