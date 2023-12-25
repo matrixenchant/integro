@@ -7,8 +7,11 @@ import { $class } from '../utils';
 import AwardsModal from '../modals/AwardsModal';
 import AddReviewModal from '../modals/AddReviewModal';
 import RatingModal from '../modals/RatingModal';
+import { Button } from '../components/ui';
 
 export const ModalContext = createContext({
+  openDisclaimer: () => {},
+
   openModal: () => {},
   closeModal: () => {},
   data: {},
@@ -39,6 +42,8 @@ export const ModalProvider = ({ children }) => {
   const [modalData, setModalData] = useState({ type: '' });
   const [open, setOpen] = useState(false);
   const $appWrap = useRef();
+
+  const [disclaimer, setDisclaimer] = useState('');
 
   useEffect(() => {
     $appWrap.current = document.querySelector('.app-wrapper');
@@ -88,6 +93,7 @@ export const ModalProvider = ({ children }) => {
         openModal,
         closeModal,
         data: modalData,
+        openDisclaimer: setDisclaimer
       }}>
       {children}
       <div
@@ -111,6 +117,15 @@ export const ModalProvider = ({ children }) => {
         </animated.div>
 
         <div onClick={closeModal} className={$class('modal-shadow', ['active', open])}></div>
+      </div>
+
+      <div className={$class('disclaimer-content', ['active', !!disclaimer])}>
+        <div className="disclaimer-overlay" onClick={() => setDisclaimer(null)}></div>
+        <div className="disclaimer-body">
+          <Button icon='fi-rr-cross' fullWidth type='text' onClick={() => setDisclaimer(null)}></Button>
+          <h2>Дисклеймер</h2>
+          {disclaimer}
+        </div>
       </div>
     </ModalContext.Provider>
   );
