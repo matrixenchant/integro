@@ -30,13 +30,17 @@ export const AppProvider = ({ children }) => {
   const [loadingUser, user, mutateUser] = useGetApi(token ? 'users/me' : null, null, {
     token,
     success: (data) => {
-      localStorage.setItem('integro-welcome', 'yes');
+      if (data.role !== 'admin') {
+        logout();
+        toast.error('Нет доступа');
+        return null
+      }
+      
       return data;
     },
     error: (e) => {
       if (e?.code === 401) {
         localStorage.removeItem('token');
-        navigate('/');
       }
     },
   });
@@ -61,7 +65,6 @@ export const AppProvider = ({ children }) => {
   };
 
   const logout = () => {
-    navigate('/welcome');
     setToken(null);
     localStorage.removeItem('token');
   };

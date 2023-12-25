@@ -16,7 +16,6 @@ const Auth = ({ login }) => {
       body,
       success: ({ token }) => {
         login(token);
-        toast('Вы успешно вошли');
       },
       error: (e) => {
         console.warn(e);
