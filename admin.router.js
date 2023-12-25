@@ -4,8 +4,8 @@ const path = require('path');
 
 const router = Router();
 
-router.use('/admin', express.static(path.join(__dirname, './integro-admin/dist')));
-router.get('/admin/*', function (req, res) {
+router.use('/', express.static(path.join(__dirname, './integro-admin/dist')));
+router.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, './integro-admin/dist', 'index.html'));
 });
 
