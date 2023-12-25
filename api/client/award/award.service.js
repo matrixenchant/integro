@@ -1,4 +1,4 @@
-import { Award, Project, User } from '../../../db/models';
+import { Award, Payment, User } from '../../../db/models';
 import { badRequest, forbidden, notFound } from '../../../utils/response-utils';
 
 export const getShopAwards = async (req) => {
@@ -47,19 +47,43 @@ export const updateAward = async (req) => {
 
 
 export const buyAward = async (req) => {
-  const { id } = req.params;
+  const { award, variant: variantIndex } = req.body;
   const user = req.user;
 
   try {
-    const award = await Award.findOne({ _id: id });
-    if (!award) throw notFound('AWARD.ERROR.NOT_FOUND');
 
-    const cost = Math.round(award.cost / 2);
+    throw forbidden('AWARD.ERROR')
+
+    const $award = await Award.findOne({ _id: award._id });
+    if (!$award) throw notFound('AWARD.ERROR.NOT_FOUND');
+
+    const cost = Math.round($award.cost / 2);
+    const variant = $award.variants[variantIndex];
     
     if (user.balance < cost) throw forbidden('AWARD.ERROR.NOT_ENOUGH_BALANCE');
+    if (!variant || variant.quantity <= 0) throw forbidden('AWARD.ERROR.EMPTY')
 
-    // user.balance -= cost;
+    user.balance -= cost;
+    $award.variants[0].quantity -= 1;
 
+    const payment = new Payment({
+      user: user._id,
+      info: {
+        award,
+        variant,
+      },
+      projectId: null,
+      price: cost,
+    });
+  
+    await payment.save();
+
+    const $user = await User.findOne({ _id: user._id });
+    $user.awards.push({
+      award: $award._id,
+      variant: variant.type,
+      payment: payment._id
+    })
 
 
     return true;

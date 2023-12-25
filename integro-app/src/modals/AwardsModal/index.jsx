@@ -128,7 +128,7 @@ const AwardPayment = ({ loading, onPay, active }) => {
       <div className="awards-modal__item-payment-block">
         <div>Ваш номер Kaspi:</div>
         <InputMask
-          style={{ borderBottom: '1px solid white', color: 'white', fontSize: 20, width: 160 }}
+          style={{ borderBottom: '1px solid white', color: 'white', fontSize: 20, width: 170 }}
           maskPlaceholder=" "
           mask="+7 (999) 999 99-99"
           value={phone}

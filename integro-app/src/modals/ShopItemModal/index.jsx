@@ -39,7 +39,11 @@ const ShopItemModal = ({ data, open, closeModal }) => {
   };
 
   const onBuyHandler = () => {
-    api(`awards/${item._id}/buy`, {
+    api(`awards/buy`, {
+      body: {
+        award: item,
+        variant
+      },
       success: (res) => {
         console.log(res);
         toast.success('Вы получили награду! Проверьте в профиле')
@@ -47,6 +51,7 @@ const ShopItemModal = ({ data, open, closeModal }) => {
       error: (e) => {
         console.warn(e);
         if (e.message === 'AWARD.ERROR.NOT_ENOUGH_BALANCE') return toast.error('Недостаточно баланса')
+        if (e.message === 'AWARD.ERROR.EMPTY') return toast.error('Товара нет в наличии')
         toast.error('Произошла ошибка')
       }
     })
@@ -110,10 +115,10 @@ const ShopItemModal = ({ data, open, closeModal }) => {
 
       <div className="si-modal-block">
         <h3>В наличии:</h3>
-        <div>{item.variants[variant].quantity}</div>
+        <div style={{ color: item.variants[variant].quantity <= 0 && 'var(--error)' }}>{item.variants[variant].quantity}</div>
       </div>
 
-      <Button fullWidth authCheck className="si-modal-btn" onClick={onBuyHandler}>
+      <Button disabled={item.variants[variant].quantity <= 0} fullWidth authCheck className="si-modal-btn" onClick={onBuyHandler}>
         <span>Получить</span>
         <Balance value={formatNumber(item.cost / 2)} />
       </Button>

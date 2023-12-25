@@ -25,7 +25,7 @@ const User = ({ user, withAvatar, withDonations, withEdit, donationsText }) => {
           <span className="user-rank"><Icon slug={getRankBySlug(targetUser?.rank)?.icon} /></span>
         </div>
         {withDonations && <div className="user-donations">{donationsText ? donationsText : `${targetUser.donationsNum || 0} пожертвований`}</div>}
-        {withEdit && <div className="user-edit">редактировать</div>}
+        {/* {withEdit && <div className="user-edit">редактировать</div>} */}
       </div>
     </div>
   );

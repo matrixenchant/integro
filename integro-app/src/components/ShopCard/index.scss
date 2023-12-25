@@ -3,11 +3,13 @@
   display: flex;
   flex-direction: column;
 
+  --shop-card-size: 150px;
+
   &-collection {
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 2;
+    z-index: 4;
     transform: translate(30%, -30%);
     opacity: 0.8;
 
@@ -23,6 +25,24 @@
     img {
       width: 24px;
       height: auto;
+    }
+  }
+
+  &-empty {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($color: #797979, $alpha: 0.6);
+
+    .fi {
+      font-size: 48px;
+      opacity: 0.4;
     }
   }
 
@@ -47,8 +67,8 @@
 
     .ui-button-wrap {
       padding: 0;
-      width: 150px;
-      height: 150px;
+      width: var(--shop-card-size);
+      height: var(--shop-card-size);
       background: none;
 
       border-radius: 20px;

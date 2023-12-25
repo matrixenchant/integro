@@ -15,7 +15,7 @@ api.get('/awards/shop', [], async (req, res) => {
   }
 });
 
-api.get('/awards/:id/buy', [authMid], async (req, res) => {
+api.post('/awards/buy', [authMid], async (req, res) => {
   try {
     const result = await buyAward(req);
     return res.json(result);
