@@ -20,6 +20,9 @@ app.use('/uploads', express.static('uploads'));
 // Api
 app.use('/api', api);
 
+// Admin
+app.use('/admin', require('./admin.router'));
+
 // App
 app.use('/', require('./client.router'));
 
