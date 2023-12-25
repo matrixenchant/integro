@@ -5,10 +5,13 @@ import { Button, Icon } from '../../components/ui';
 import { useApp } from '../../hooks/useApp';
 import { $class, formatNumber } from '../../utils';
 import './index.scss';
+import { useApi } from '../../hooks/useApi';
+import toast from 'react-hot-toast';
 
 const ShopItemModal = ({ data, open, closeModal }) => {
   const { item } = data;
   const { getCollectionBySlug } = useApp();
+  const [loading, api] = useApi();
   const [gallery, setGallery] = useState(item.variants[0].imgs);
   const [variant, setVariant] = useState(0);
   const [activeImg, setActiveImg] = useState(0);
@@ -36,7 +39,17 @@ const ShopItemModal = ({ data, open, closeModal }) => {
   };
 
   const onBuyHandler = () => {
-
+    api(`awards/${item._id}/buy`, {
+      success: (res) => {
+        console.log(res);
+        toast.success('Вы получили награду! Проверьте в профиле')
+      },
+      error: (e) => {
+        console.warn(e);
+        if (e.message === 'AWARD.ERROR.NOT_ENOUGH_BALANCE') return toast.error('Недостаточно баланса')
+        toast.error('Произошла ошибка')
+      }
+    })
   }
 
   return (

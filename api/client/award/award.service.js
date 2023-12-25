@@ -1,5 +1,5 @@
 import { Award, Project, User } from '../../../db/models';
-import { badRequest, notFound } from '../../../utils/response-utils';
+import { badRequest, forbidden, notFound } from '../../../utils/response-utils';
 
 export const getShopAwards = async (req) => {
   return await Award.find({ project: null }).sort({ createdAt: -1 });
@@ -44,3 +44,26 @@ export const updateAward = async (req) => {
     throw e;
   }
 };
+
+
+export const buyAward = async (req) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  try {
+    const award = await Award.findOne({ _id: id });
+    if (!award) throw notFound('AWARD.ERROR.NOT_FOUND');
+
+    const cost = Math.round(award.cost / 2);
+    
+    if (user.balance < cost) throw forbidden('AWARD.ERROR.NOT_ENOUGH_BALANCE');
+
+    // user.balance -= cost;
+
+
+
+    return true;
+  } catch (e) {
+    throw e;
+  }
+}

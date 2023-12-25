@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useApp } from './useApp';
 
-//const SERVER = 'http://localhost:5000';
-const SERVER = '';
+const SERVER = import.meta.env.DEV ? 'http://localhost:5000' : '';
 
 export const useApi = (params = {}) => {
   const { initLoading } = {
