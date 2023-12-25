@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { Home, Welcome } from './pages';
-import Project from './pages/Project';
-import Profile from './pages/Profile';
 import { useApp } from './hooks/useApp';
+import { Home, Profile, Project, Shop, Welcome } from './pages';
 
 export default function Router() {
   const isFirstLaunch = !localStorage.getItem('integro-welcome');
@@ -23,6 +21,7 @@ export default function Router() {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/projects/:id" element={<Project />} />
+        <Route path="/shop" element={<Shop />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

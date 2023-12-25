@@ -1,5 +1,6 @@
 import { Payment, Project, User } from '../../../db/models';
 import { badRequest, notFound } from '../../../utils/response-utils';
+import { checkRank } from '../user/user.service';
 
 export const getUserPayments = async (req) => {
   const { _id } = req.user;
@@ -7,27 +8,47 @@ export const getUserPayments = async (req) => {
   return await Payment.find({ user: _id }).sort({ createdAt: -1 });
 };
 
-export const closePaymentById = async (req) => {
-  const { paymentId } = req.body;
+export const getAll = async (req) => {
+  return await Payment.find().sort({ createdAt: -1 });
+}
 
-  const payment = await Payment.findOne({ user: req.user._id, _id: paymentId });
+export const closePaymentById = async (req) => {
+  const { paymentId, donate } = req.body;
+
+  const userId = req.user.role === 'admin' && req.body.userId ? req.body.userId : req.user._id
+
+  const payment = await Payment.findOne({ user: userId, _id: paymentId });
   if (!payment) throw notFound('PAYMENT.ERROR.NOT_EXIST');
   if (payment.status === 'confirm' || payment.status === 'rejected')
     throw badRequest('PAYMENT.ERROR.ALREADY_CLOSED');
 
+
+  let price = payment.price;
+  if (price === -1) {
+    console.log('DONATE Payment: ', donate);
+
+    payment.price = +donate;
+    price = +donate;
+  }
+
   const project = await Project.findOne({ _id: payment.projectId });
-  project.current += payment.price;
+  project.current += price;
   project.donations += 1;
   await project.save();
 
-  const user = await User.findOne({ _id: req.user._id });
+  const user = await User.findOne({ _id: userId });
 
-  const additive = Math.round(payment.price * 0.1)
+  const additive = Math.round(price * 0.07)
   user.balance += additive;
-  user.overallBalance += additive;
 
-  user.donations += 1;
-  user.awards.push(payment.info.award);
+  user.donationsNum += 1;
+  user.donations += price;
+
+  user.rank = checkRank(user.donations);
+  console.log(`NEW RANK: ${user.rank}`);
+
+  // user.awards.push(payment.info.award);
+
   await user.save();
 
   payment.status = 'confirm';

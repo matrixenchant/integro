@@ -55,20 +55,26 @@
 
     &-main {
       display: flex;
-      align-items: start;
+      align-items: center;
       justify-content: space-between;
     }
 
     &-balance {
       & > div {
         margin-top: 10px;
-        display: flex;
-        align-items: center;
-        column-gap: 5px;
+        &:first-child {
+          margin-top: 0;
+        }
 
-        span {
-          font-size: 20px;
-          font-weight: 600;
+        & > div {
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+
+          span {
+            font-size: 20px;
+            font-weight: 600;
+          }
         }
       }
     }
@@ -80,28 +86,26 @@
       justify-content: center;
 
       .fi {
-        font-size: 32px;
+        font-size: 48px;
       }
     }
 
     &-progress {
-      padding: 0 20px;
+      padding: 5px 20px;
+      padding-bottom: 40px;
       overflow-x: auto;
 
       &-wrap {
         position: relative;
         width: fit-content;
         display: flex;
+        align-items: center;
         flex-wrap: nowrap;
-
-        column-gap: 100px;
       }
 
       &-line {
-        position: absolute;
-        top: 25px;
-        left: 35px;
-        right: 35px;
+        position: relative;
+        width: 110px;
         height: 2px;
         background-color: #696e79;
 
@@ -118,7 +122,7 @@
       &__item {
         position: relative;
         z-index: 2;
-        width: 80px;
+        width: 50px;
 
         .fi {
           display: block;
@@ -140,7 +144,12 @@
         }
 
         div:last-child {
-          margin-top: 5px;
+          position: absolute;
+          top: calc(100% + 5px);
+          left: 50%;
+          transform: translateX(-50%);
+
+          width: 100px;
           font-size: 12px;
           text-align: center;
         }
@@ -209,6 +218,7 @@
   &-payments {
     margin-top: 40px;
     padding: 0 20px;
+    padding-bottom: 40px;
 
     &-wrap {
       margin-top: 10px;

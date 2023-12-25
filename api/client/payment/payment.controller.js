@@ -1,9 +1,19 @@
 import { Router } from 'express';
 import CommonError from '../../library/error';
 import { authMid } from '../../middlewares/auth.middleware';
-import { closePaymentById, createPayment, getUserPayments } from './payment.service';
+import { adminMid } from '../../middlewares/admin.middleware';
+import { closePaymentById, createPayment, getAll, getUserPayments } from './payment.service';
 
 const api = Router();
+
+api.get('/payments/all', [authMid, adminMid], async (req, res) => {
+  try {
+    const result = await getAll(req);
+    return res.json(result);
+  } catch (err) {
+    return CommonError(req, err, res);
+  }
+});
 
 api.get('/payments', [authMid], async (req, res) => {
   try {

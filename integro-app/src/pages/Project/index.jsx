@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '../../components/ui';
+import { Button, Icon } from '../../components/ui';
 import { useApp } from '../../hooks/useApp';
 import './index.scss';
 
@@ -31,6 +31,7 @@ const Project = () => {
   );
 
   useEffect(() => {
+    if (project.content)
     setActiveTab(Object.keys(project.content)[0])
   }, [project])
 
@@ -75,8 +76,7 @@ const Project = () => {
         api(`projects/${project._id}`, {
           method: 'PUT',
           body: {
-            content: {"Story":[{"img":"https://ksr-ugc.imgix.net/assets/043/038/892/d6bf0b39e27e2fe27359981d259824e0_original.jpg?ixlib=rb-4.1.0&w=680&fit=max&v=1699863695&gif-q=50&q=92&s=9cd66e16c59efef5aedba5cadad0ab5b"},{"img":"https://ksr-ugc.imgix.net/assets/043/055/598/a92149832d78512fe5b393514774b166_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1699962013&gif-q=50&lossless=true&s=7301d3559e579f5c5d7a6a52d1b6b612"},{"img":"https://ksr-ugc.imgix.net/assets/043/055/598/a92149832d78512fe5b393514774b166_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1699962013&gif-q=50&lossless=true&s=7301d3559e579f5c5d7a6a52d1b6b612"}],"Risks and challenges":[{"text":"Graphene-X debuted at Kickstarter in November 2019, just as the pandemic began. Yet, here we are, launching our 8th campaign. We've made a tradition of timely deliveries, maintaining impeccable quality each time. Our dedication to meeting deadlines, even when it strains our finances, is evident in our 4.95 out of 5 rating."},{"text":"Production: We work exclusively with top-tier manufacturers and suppliers. While this ensures quality, there's always a slight chance of delays from their side. Yet, our faith is unwavering since these partners were active even during the pandemic's peak."},{"text":"Shipping: Our collaboration with leading fulfillment companies aims to stave off shipping delays. Nonetheless, unpredictable factors, like pandemic-induced flight restrictions, can still play a role."}],"Environmental commitments":[{"text":"Visit our Environmental Resources Center to learn how Kickstarter encourages sustainable practices."}]},
-            // content: {"Story":[{"img":"https://ksr-ugc.imgix.net/assets/042/826/569/46953a10ded0f0b85f4dfcc5e91d936a_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698243262&gif-q=50&lossless=true&s=1e7f1c20149dadaad0b994c8620cc670"},{"img":"https://ksr-ugc.imgix.net/assets/043/056/589/03b87be4435d773ae5703239551d285e_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1699968195&gif-q=50&lossless=true&s=daa61e365c0dd35f7af71c13509eebc9"}],"The Problem & Solution":[{"img":"https://ksr-ugc.imgix.net/assets/042/704/014/6ad9eb3b852d36e1a74955664a75f19f_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1697447260&gif-q=50&lossless=true&s=2e122e57ddfb3e279dbf16d9ee8971b1"},{"img":"https://ksr-ugc.imgix.net/assets/042/619/220/107d22db3f47baadb01af58eec7d321c_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1696880937&gif-q=50&lossless=true&s=2815b9b25ef1d91f62882be004e5c218"}],"Add-ons":[{"img":"https://ksr-ugc.imgix.net/assets/042/837/563/16f12a695165a9a357b83296447ca0e2_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698309881&gif-q=50&lossless=true&s=f02020754a258579c2f3dabc1ac2920b"},{"img":"https://ksr-ugc.imgix.net/assets/042/837/559/4c17a287852a76f6c66a31e2b560f919_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698309863&gif-q=50&lossless=true&s=d8bb0665ba7365ca3fa85c37c5e24ac3"}],"The Team":[{"img":"https://ksr-ugc.imgix.net/assets/042/793/409/a0f0d6b517c629e24d35634a5ac500b1_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698053607&gif-q=50&lossless=true&s=a8a787192060d39c653d7771a026e7e7"}],"Risks":[{"text":"Venturing into a crowdfunding campaign inevitably comes with its fair share of risks and challenges, from potential manufacturing hiccups to unforeseen shipping delays. However, the Lumicard project is backed by our extensive experience, marking our 10th crowdfunding campaign and 9th on Kickstarter."},{"text":"Over the years, we’ve navigated through various learning curves and have fine-tuned our approach in addressing and mitigating these challenges. Our track record speaks to our commitment to delivering on our promises and ensuring that our backers are satisfied with the end product. While we anticipate a smooth journey, we are prepared and well-equipped to tackle any hurdles that come our way, ensuring transparency and regular updates every step of the way."}]}
+            content: { "О нас": [ { "img": "https://only-dev.kz/integra/photo_2023-12-24_22-37-02.jpg" } ], "Приложение": [ { "img": "https://only-dev.kz/integra/IMG_7451.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7453.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7456.PNG" } ], "Наша миссия": [ { "img": "https://only-dev.kz/integra/IMG_7666.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7671.PNG" } ], "Наша команда": [ { "img": "https://only-dev.kz/integra/IMG_7667.PNG" } ]}
           }
         })
       }} /> */}
@@ -107,7 +107,7 @@ const Project = () => {
           }}
           className="project-name">
           <h1>{project.name}</h1>
-          <Button className="project-play" icon="fi-rr-play" onClick={onVideoClick} />
+          {project.video && <Button className="project-play" icon="fi-rr-play" onClick={onVideoClick} />}
         </animated.div>
       </animated.div>
 
@@ -205,6 +205,10 @@ export default Project;
 
 
 /*
+
+{ "О нас": [ { "img": "https://only-dev.kz/integra/photo_2023-12-24_22-37-02.jpg" } ], "Приложение": [ { "img": "https://only-dev.kz/integra/IMG_7451.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7453.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7456.PNG" } ], "Наша миссия": [ { "img": "https://only-dev.kz/integra/IMG_7666.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7671.PNG" } ], "Наша команда": [ { "img": "https://only-dev.kz/integra/IMG_7667.PNG" } ]}
+
+{ "О нас": [ { "img": "https://only-dev.kz/integra/photo_2023-12-24_13-49-59.jpg" }, { "img": "https://only-dev.kz/integra/photo_2023-12-24_13-50-00.jpg" }, { "img": "https://only-dev.kz/integra/photo_2023-12-24_13-49-59 (2).jpg" } ], "Наши услуги": [ { "img": "https://only-dev.kz/integra/IMG_7419.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7423.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7428.JPG" } ], "Наша цель": [ { "img": "https://only-dev.kz/integra/IMG_7429.PNG" }, { "img": "https://only-dev.kz/integra/IMG_7431.PNG" } ]}
 
 {"Story":[{"img":"https://ksr-ugc.imgix.net/assets/042/826/569/46953a10ded0f0b85f4dfcc5e91d936a_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698243262&gif-q=50&lossless=true&s=1e7f1c20149dadaad0b994c8620cc670"},{"img":"https://ksr-ugc.imgix.net/assets/043/056/589/03b87be4435d773ae5703239551d285e_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1699968195&gif-q=50&lossless=true&s=daa61e365c0dd35f7af71c13509eebc9"}],"The Problem & Solution":[{"img":"https://ksr-ugc.imgix.net/assets/042/704/014/6ad9eb3b852d36e1a74955664a75f19f_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1697447260&gif-q=50&lossless=true&s=2e122e57ddfb3e279dbf16d9ee8971b1"},{"img":"https://ksr-ugc.imgix.net/assets/042/619/220/107d22db3f47baadb01af58eec7d321c_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1696880937&gif-q=50&lossless=true&s=2815b9b25ef1d91f62882be004e5c218"}],"Add-ons":[{"img":"https://ksr-ugc.imgix.net/assets/042/837/563/16f12a695165a9a357b83296447ca0e2_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698309881&gif-q=50&lossless=true&s=f02020754a258579c2f3dabc1ac2920b"},{"img":"https://ksr-ugc.imgix.net/assets/042/837/559/4c17a287852a76f6c66a31e2b560f919_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698309863&gif-q=50&lossless=true&s=d8bb0665ba7365ca3fa85c37c5e24ac3"}],"The Team":[{"img":"https://ksr-ugc.imgix.net/assets/042/793/409/a0f0d6b517c629e24d35634a5ac500b1_original.png?ixlib=rb-4.1.0&w=680&fit=max&v=1698053607&gif-q=50&lossless=true&s=a8a787192060d39c653d7771a026e7e7"}],"Risks":[{"text":"Venturing into a crowdfunding campaign inevitably comes with its fair share of risks and challenges, from potential manufacturing hiccups to unforeseen shipping delays. However, the Lumicard project is backed by our extensive experience, marking our 10th crowdfunding campaign and 9th on Kickstarter."},{"text":"Over the years, we’ve navigated through various learning curves and have fine-tuned our approach in addressing and mitigating these challenges. Our track record speaks to our commitment to delivering on our promises and ensuring that our backers are satisfied with the end product. While we anticipate a smooth journey, we are prepared and well-equipped to tackle any hurdles that come our way, ensuring transparency and regular updates every step of the way."}]}
 

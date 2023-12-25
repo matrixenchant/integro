@@ -2,6 +2,7 @@ import { Router } from 'express';
 import CommonError from '../../library/error';
 import { authMid } from '../../middlewares/auth.middleware';
 import { addProjectReviewById, getProjectReviewsById, getProjects, updateProjectById } from './project.service';
+import { adminMid } from '../../middlewares/admin.middleware';
 
 const api = Router();
 
@@ -23,7 +24,7 @@ api.get('/projects/:_id/reviews', [], async (req, res) => {
   }
 });
 
-api.put('/projects/:_id', [authMid], async (req, res) => {
+api.put('/projects/:_id', [authMid, adminMid], async (req, res) => {
   try {
     const result = await updateProjectById(req);
     return res.json(result);

@@ -1,0 +1,10 @@
+.balance {
+    display: flex;
+    align-items: center;
+
+    svg {
+        flex-shrink: 0;
+        margin-left: 3px;
+        width: 18px;
+    }
+}

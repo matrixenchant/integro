@@ -68,7 +68,8 @@ function lerp(start, end, progress) {
 }
 
 function formatNumber(num) {
-  if (!num) return undefined;
+  if (num === -1) return '';
+  if (num === undefined) return 0;
   return num.toLocaleString();
 }
 

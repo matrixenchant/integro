@@ -1,16 +1,37 @@
 import React from 'react';
-import Button from '../ui/Button';
-import './index.scss';
+import { useModal } from '../../hooks/useModal';
 import { formatNumber } from '../../utils';
 import { Icon } from '../ui';
+import Button from '../ui/Button';
+import './index.scss';
+import { useApp } from '../../hooks/useApp';
 import toast from 'react-hot-toast';
 
-const ShopCard = ({ award }) => {
+const ShopCard = ({ item, showCollection = true }) => {
+  const { openModal } = useModal();
+  const { token } = useApp();
+  const { getCollectionBySlug } = useApp();
+  const { imgs } = item.variants[0];
+  const collection = getCollectionBySlug(item.collection);
+
   return (
-    <Button className="shop-card" onClick={() => toast('Пока это нельзя получить')}>
-      <div className="shop-card-hero" style={{ backgroundImage: `url(${award.img})` }}></div>
-      <div className="shop-card-cost">{formatNumber(award.cost) || '--'}<Icon slug='int' /></div>
-    </Button>
+    <div className="shop-card">
+      {showCollection && collection?.logo && (
+        <div className="shop-card-collection">
+          <img src={collection.logo} alt={collection.name} />
+        </div>
+      )}
+      <Button
+        className="shop-card-hero"
+        style={{ backgroundImage: `url(${imgs[0]})` }}
+        onClick={() => token ? openModal('shopItem', { item }) : toast('Необходимо войти в аккаунт') }>
+        <div className="shop-card-cost">
+          <span>{formatNumber(item.cost / 2) || '--'}<span className='shop-card-cost-old'>{formatNumber(item.cost)}</span></span>
+          <Icon slug="int" />
+        </div>
+      </Button>
+      <div className="shop-card-name">{item.name}</div>
+    </div>
   );
 };
 

@@ -3,25 +3,75 @@ import { useNavigate } from 'react-router-dom';
 import { useApi } from '../hooks/useApi';
 import useGetApi from '../hooks/useGetApi';
 
+import almauLogo from '../assets/almau.png'
+
+const ranks = [
+  {
+    slug: 'newbie',
+    label: 'Новичок',
+    icon: 'fi-rr-medical-star',
+    value: 0,
+  },
+  {
+    slug: 'empathy',
+    label: 'Энтузиаст Эмпатии',
+    icon: 'fi-rr-hand-heart',
+    value: 10000,
+  },
+  {
+    slug: 'angel',
+    label: 'Бизнес Ангел',
+    icon: 'fi-rr-angel',
+    value: 50000,
+  },
+  {
+    slug: 'star',
+    label: 'Звезда Содействия',
+    icon: 'fi-rr-star-christmas',
+    value: 150000,
+  },
+  {
+    slug: 'inspiration',
+    label: 'Меценат Вдохновения',
+    icon: 'fi-rr-star-shooting',
+    value: 500000,
+  },
+];
+
+const shopCollections = [
+  {
+    slug: 'almau',
+    logo: almauLogo,
+    name: 'AlmaU Shop'
+  }
+]
+
 export const AppContext = createContext({
   token: null,
   user: null,
   login: (token) => {},
   logout: () => {},
   changeUser: (props) => {},
-  getRankBySlug: (slug) => {},
   
+  
+  ranks: [],
+  getRankBySlug: (slug) => {},
 
   projects: [],
-  ranks: [],
   getProjectById: (id) => {},
+
+  shop: [],
+  shopCollections,
+  getShopItemById: (id) => {},
+  getShopCollectionItems: (slug) => {},
+  getCollectionBySlug: (slug) => {}
 });
 
 export const AppProvider = ({ children }) => {
   const [loading, api] = useApi();
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [loadingUser, user, mutateUser] = useGetApi(token ? 'user/me' : null, null, {
+  const [loadingUser, user, mutateUser] = useGetApi(token ? 'users/me' : null, null, {
     token,
     success: (data) => {
       localStorage.setItem('integro-welcome', 'yes');
@@ -34,44 +84,6 @@ export const AppProvider = ({ children }) => {
       }
     },
   });
-  const [loadingProjects, projects] = useGetApi('projects', []);
-
-  const ranks = [
-    {
-      slug: 'newbie',
-      label: 'Новичок',
-      icon: 'fi-rr-medical-star',
-      value: 0,
-    },
-    {
-      slug: 'empathy',
-      label: 'Энтузиаст Эмпатии',
-      icon: 'fi-rr-hand-heart',
-      value: 10000,
-    },
-    {
-      slug: 'angel',
-      label: 'Бизнес Ангел',
-      icon: 'fi-rr-angel',
-      value: 20000,
-    },
-    {
-      slug: 'star',
-      label: 'Звезда Содействия',
-      icon: 'fi-rr-star-christmas',
-      value: 30000,
-    },
-    {
-      slug: 'inspiration',
-      label: 'Меценат Вдохновения',
-      icon: 'fi-rr-star-shooting',
-      value: 40000,
-    },
-  ];
-
-  const getRankBySlug = (slug) => {
-    return ranks.find(x => x.slug === slug)
-  }
 
   const changeUser = (props) => {
     mutateUser({ ...user, ...props });
@@ -90,9 +102,40 @@ export const AppProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  // ============== RANKS
+  const getRankBySlug = (slug) => {
+    return ranks.find(x => x.slug === slug)
+  }
+
+
+  // ============== PROJECTS
+  const [loadingProjects, projects] = useGetApi('projects', []);
+
   const getProjectById = (id) => {
     return projects.find((x) => x._id === id);
   };
+
+
+  // ============== SHOP
+  const [loadingShop, shop] = useGetApi('awards/shop', []);
+
+  const getShopWithCollection = () => {
+    return shop.map(x => x.collection ? ({...x, collection: shopCollections.find(c => c.slug === x.collection)}) : x)
+  }
+
+  const getShopItemById = (id) => {
+    const item = shop.find(x => x.id === id);
+    if (!item) return null;
+    return item;
+  }
+
+  const getShopCollectionItems = (slug) => {
+    return shop.filter(x => x.collection === slug)
+  }
+
+  const getCollectionBySlug = (slug) => {
+    return shopCollections.find(x => x.slug === slug)
+  }
 
   return (
     <AppContext.Provider
@@ -105,7 +148,11 @@ export const AppProvider = ({ children }) => {
         projects,
         changeUser,
         ranks,
-        getRankBySlug
+        getRankBySlug,
+        shop,
+        getShopCollectionItems,
+        getCollectionBySlug,
+        shopCollections
       }}>
       {children}
     </AppContext.Provider>

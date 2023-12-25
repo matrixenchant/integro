@@ -9,8 +9,6 @@ const User = ({ user, withAvatar, withDonations, withEdit, donationsText }) => {
 
   const targetUser = user || thisUser;
 
-  console.log('=============', getRankBySlug(targetUser?.rank), targetUser?.rank);
-
   if (!targetUser)
     return (
       <div className="user">
@@ -26,7 +24,7 @@ const User = ({ user, withAvatar, withDonations, withEdit, donationsText }) => {
           <span>{targetUser.name}</span>
           <span className="user-rank"><Icon slug={getRankBySlug(targetUser?.rank)?.icon} /></span>
         </div>
-        {withDonations && <div className="user-donations">{donationsText ? donationsText : `${targetUser.donations || 0} пожертвований`}</div>}
+        {withDonations && <div className="user-donations">{donationsText ? donationsText : `${targetUser.donationsNum || 0} пожертвований`}</div>}
         {withEdit && <div className="user-edit">редактировать</div>}
       </div>
     </div>

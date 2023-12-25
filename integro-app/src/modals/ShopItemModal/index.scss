@@ -1,0 +1,177 @@
+.si-modal {
+  padding: 15px;
+
+  &-gallery {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    &-nav {
+      position: absolute;
+      z-index: 2;
+
+      border-radius: 0;
+      padding: 0;
+      width: 50px;
+      height: 100%;
+
+      &.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .ui-button-wrap {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .fi {
+        font-size: 30px;
+      }
+
+      &:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+
+      &:nth-child(2) {
+        top: 0;
+        right: 0;
+      }
+    }
+
+    &__item {
+      position: relative;
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+
+      background-position: center;
+      background-size: cover;
+
+      &::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+        opacity: 0.6;
+        border-radius: inherit;
+      }
+    }
+
+    &-thumbs {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .ui-button {
+        margin-left: 8px;
+        border-radius: 8px;
+        background-position: center;
+        background-size: cover;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        .ui-button-wrap {
+          border-radius: 8px;
+          padding: 0;
+          width: 40px;
+          height: 40px;
+          background: none;
+        }
+
+        &.active {
+          box-shadow: 0 0 0 1px var(--green);
+        }
+      }
+    }
+  }
+
+  &-name {
+    margin-top: 10px;
+  }
+
+  &-block {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin-right: 10px;
+    }
+
+    & > div {
+      transform: translateY(2px);
+    }
+  }
+
+  &-variants {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+
+    &-wrap {
+      margin-left: 15px;
+      display: flex;
+    }
+
+    &__item {
+      margin-left: 10px;
+      border-radius: 100%;
+
+      .ui-button-wrap {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        background: none;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &.active {
+        box-shadow: 0 0 0 1px var(--green);
+      }
+    }
+  }
+
+  &-description {
+    margin-top: 10px;
+  }
+
+  &-collection {
+    margin-top: 5px;
+    font-size: 15px;
+
+    opacity: 0.6;
+  }
+
+  &-btn {
+    margin-top: 15px;
+
+    .ui-button-wrap span {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+  }
+}

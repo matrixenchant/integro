@@ -1,5 +1,6 @@
 .awards-modal {
     padding: 15px;
+    min-height: 200px;
 
     h1 {
         color: var(--green);
@@ -55,11 +56,11 @@
                 }
 
                 div:first-child {
-                    font-size: 16px;
+                    font-size: 14px;
                     opacity: 0.5;
                 }
                 div:last-child {
-                    font-size: 20px;
+                    font-size: 16px;
                 }
             }
 
@@ -112,6 +113,28 @@
 
         &-wrap {
             padding: 15px;
+        }
+    }
+
+    &-donate {
+
+        & > div:first-child {
+            display: flex;
+            align-items: center;
+            
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            margin-bottom: 5px;
+        }
+        
+        img {
+            margin-right: 15px;
+            padding: 5px;
+            width: 60px;
+            border-radius: 100%;
+            background-color: var(--dark-blue);
         }
     }
 }

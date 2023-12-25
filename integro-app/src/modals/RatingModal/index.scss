@@ -1,0 +1,33 @@
+.rating-modal {
+    padding: 15px;
+
+    &__item {
+        padding: 10px;
+        border-radius: 16px;
+        
+        margin-top: 10px;
+        &:first-child {
+            margin-top: 0;
+        }
+
+        background-color: var(--dark-blue);
+
+        display: flex;
+        align-items: center;
+
+        & > div:first-child {
+            font-size: 18px;
+            margin-right: 10px;
+            opacity: 0.5;
+        }
+
+        &.self {
+            box-shadow: 0 0 0 1px var(--green);
+        }
+    }
+
+    &-delimiter {
+        margin: 20px 0;
+        border-bottom: 2px dashed var(--green);
+    }
+}

@@ -2,10 +2,11 @@ import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { AuthModal } from '../modals';
+import { AuthModal, ShopItemModal } from '../modals';
 import { $class } from '../utils';
 import AwardsModal from '../modals/AwardsModal';
 import AddReviewModal from '../modals/AddReviewModal';
+import RatingModal from '../modals/RatingModal';
 
 export const ModalContext = createContext({
   openModal: () => {},
@@ -25,6 +26,12 @@ const modals = {
   },
   addReview: {
     component: AddReviewModal
+  },
+  shopItem: {
+    component: ShopItemModal
+  },
+  rating: {
+    component: RatingModal
   }
 };
 
