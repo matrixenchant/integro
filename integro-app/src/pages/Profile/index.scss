@@ -197,20 +197,40 @@
         margin-left: 0;
       }
 
+      .ui-button-wrap {
+        padding: 0;
+        border-radius: inherit;
+      }
+      .ui-button-body {
+        display: block;
+      }
+
       width: 180px;
       border-radius: 15px;
       background-color: var(--dark-blue);
 
-      div:first-child {
+      &-image {
         width: 100%;
-        height: 80px;
+        height: 150px;
         background-position: center;
         background-size: cover;
         border-radius: 15px;
       }
 
-      div:last-child {
-        padding: 10px;
+      &-title {
+        display: flex;
+        padding: 5px 10px;
+
+        font-weight: 400;
+        font-size: 15px;
+      }
+
+      &-status {
+        padding: 0 10px;
+        padding-bottom: 3px;
+        text-align: left;
+
+        font-size: 14px;
       }
     }
   }

@@ -124,7 +124,7 @@ export const AppProvider = ({ children }) => {
   }
 
   const getShopItemById = (id) => {
-    const item = shop.find(x => x.id === id);
+    const item = shop.find(x => x._id === id);
     if (!item) return null;
     return item;
   }
@@ -152,6 +152,7 @@ export const AppProvider = ({ children }) => {
         shop,
         getShopCollectionItems,
         getCollectionBySlug,
+        getShopItemById,
         shopCollections
       }}>
       {children}

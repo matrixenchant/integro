@@ -3,6 +3,7 @@ import CommonError from '../../library/error';
 import { authMid } from '../../middlewares/auth.middleware';
 import { adminMid } from '../../middlewares/admin.middleware';
 import { getAll, getRating } from './user.service';
+import { Award } from '../../../db/models'
 
 const api = Router();
 

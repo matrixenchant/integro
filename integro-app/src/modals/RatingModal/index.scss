@@ -1,10 +1,12 @@
 .rating-modal {
+    max-height: 85svh;
+    overflow-y: auto;
     padding: 15px;
 
     &__item {
         padding: 10px;
         border-radius: 16px;
-        
+
         margin-top: 10px;
         &:first-child {
             margin-top: 0;

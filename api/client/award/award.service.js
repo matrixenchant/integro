@@ -52,39 +52,41 @@ export const buyAward = async (req) => {
 
   try {
 
-    throw forbidden('AWARD.ERROR')
-
     const $award = await Award.findOne({ _id: award._id });
     if (!$award) throw notFound('AWARD.ERROR.NOT_FOUND');
 
     const cost = Math.round($award.cost / 2);
     const variant = $award.variants[variantIndex];
-    
+
     if (user.balance < cost) throw forbidden('AWARD.ERROR.NOT_ENOUGH_BALANCE');
     if (!variant || variant.quantity <= 0) throw forbidden('AWARD.ERROR.EMPTY')
 
-    user.balance -= cost;
-    $award.variants[0].quantity -= 1;
+    const $user = await User.findOne({ _id: user._id });
 
-    const payment = new Payment({
+    $user.balance -= cost;
+    $award.variants = $award.variants.map((x, i) => i === variantIndex ? ({...x, quantity: x.quantity - 1 }) : x);
+
+    const $payment = new Payment({
       user: user._id,
       info: {
         award,
         variant,
+        type: 'shop'
       },
       projectId: null,
       price: cost,
     });
-  
-    await payment.save();
 
-    const $user = await User.findOne({ _id: user._id });
+    await $payment.save();
+
     $user.awards.push({
       award: $award._id,
       variant: variant.type,
-      payment: payment._id
+      payment: $payment._id
     })
 
+    await $user.save();
+    await $award.save();
 
     return true;
   } catch (e) {

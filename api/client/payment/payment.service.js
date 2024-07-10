@@ -32,11 +32,11 @@ export const closePaymentById = async (req) => {
   }
 
   const project = await Project.findOne({ _id: payment.projectId });
+  const user = await User.findOne({ _id: userId });
+
   project.current += price;
   project.donations += 1;
   await project.save();
-
-  const user = await User.findOne({ _id: userId });
 
   const additive = Math.round(price * 0.07)
   user.balance += additive;

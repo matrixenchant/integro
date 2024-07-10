@@ -12,7 +12,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [loading, payments, mutate] = useGetApi('payments', []);
   const [_, api] = useApi();
-  const { user, logout, changeUser, ranks } = useApp();
+  const { user, logout, changeUser, ranks, getShopItemById } = useApp();
 
   if (!user) return null;
 
@@ -117,12 +117,23 @@ const Profile = () => {
         {!!user?.awards?.length && (
           <div className="profile-awards-wrap">
             <div>
-              {user.awards.map((award, i) => (
-                <div className="profile-awards__item" key={i}>
-                  <div style={{ backgroundImage: `url(${award.image})` }}></div>
-                  <div>{award.title}</div>
-                </div>
-              ))}
+              {user.awards.map((data, i) => {
+                const award = getShopItemById(data.award);
+                if (!award) return null;
+
+                const variant = award.variants.find(x => x.type === data.variant);
+
+                return (
+                  <Button type='text' className="profile-awards__item" key={i}>
+                    <div className='profile-awards__item-image' style={{ backgroundImage: `url(${variant.imgs[0]})` }}></div>
+                    <div className='profile-awards__item-title'>{award.name}</div>
+
+                    {data.status === 'pending' && <div className='profile-awards__item-status' style={{ color: 'var(--alert)' }}>Не выдан</div>}
+                    {data.status === 'cancel' && <div className='profile-awards__item-status' style={{ color: 'var(--error)' }}>Отменён</div>}
+                    {data.status !== 'confirm' && <div className='profile-awards__item-status' style={{ color: 'var(--green)' }}>Получен</div>}
+                  </Button>
+                )
+              })}
             </div>
           </div>
         )}
@@ -137,7 +148,7 @@ const Profile = () => {
             <div className="profile-payments__item" key={_id}>
               <div>
                 <div className="profile-payments__item-title">
-                  <h3>{info.award ? info.award.title : `Донат ₸${formatNumber(price)}`}</h3>
+                  <h3>{info.award ? info.award.name : `Донат ₸${formatNumber(price)}`}</h3>
                   {status === 'confirm' && (
                     <div
                       className="profile-payments__item-status"
