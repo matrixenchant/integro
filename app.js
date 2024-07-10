@@ -26,7 +26,7 @@ app.use('/admin', require('./admin.router'));
 // App
 app.use('/', require('./client.router'));
 
-server.listen(5000, async () => {
+server.listen(8000, async () => {
   try {
     console.log('server starting...');
     await db.connect();
